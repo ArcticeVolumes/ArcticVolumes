@@ -20,22 +20,38 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+
+    <script>
+      window.onscroll = function(){
+          growShrinkLogo()
+
+      };
+
+      function growShrinkLogo(){
+        var Logo = document.getElementById("Logo")
+        if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+           Logo.classList.add("scrolled");
+        } else{
+         Logo.classList.remove("scrolled");
+        }
+      }
+
+    </script>
     <!-- HEADING/ NAV BAR  -->
-    <header id="header">
+    <header class="header-transparent">
       <div class="header-inner">
+        
         <a href="index.html" aria-label="Home">
-          <img
-            src="images/arcticvolumeslogo2.png"
-            class="logo"
-            alt="Arctic Volumes"
-          />
+          <img src="images/actic volumes logo transparnt white.png" class="logo" alt="Arctic Volumes" style="width:125px;" id="Logo"/>  
         </a>
 
         <nav aria-label="Primary navigation">
-          <ul id="navbar">
-            <li><a href="index.html">Shop</a></li>
+           <ul id="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Store.html">Volumes</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="index.html">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            
           </ul>
         </nav>
       </div>
@@ -87,9 +103,7 @@
             </p>
 
             <div class="socials">
-              <a href=""><i class="fab fa-facebook-f"></i></a>
-              <a href=""><i class="fab fa-twitter"></i></a>
-              <a href=""><i class="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/arctic_volumes/"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
         </div>
@@ -121,62 +135,41 @@
 
     <!--NEWSLETTER SECTION  -->
     <section id="newsletter" class="section-p1 section-m1">
-      <div class="newstext">
-        <h4>Sign Up For Newsletters</h4>
-        <p>
-          Get E-mail updates about our latest shop and
-          <span>special offers.</span>
-        </p>
-      </div>
-      <div class="form">
-        <input type="text" placeholder="Your email address" />
-        <button class="normal">Sign Up</button>
-      </div>
+
     </section>
 
     <!--FOOTER  -->
 
     <footer class="section-p1">
-      <div class="col">
-        <h4>Contact</h4>
-        <p><strong>Address: </strong>123 street</p>
-        <p><strong>Hours: </strong>Anytime</p>
-        <p>
-          <strong>Phone: </strong><a href="tel:+15195555555"></a>(519)-555-5555
-        </p>
-        <div class="follow">
-          <h4>Follow Us</h4>
-          <div class="icon">
-            <i class="fab fa-facebook-f"> </i>
-            <i class="fab fa-twitter"> </i>
-            <i class="fab fa-instagram"> </i>
-            <i class="fab fa-pinterest-p"> </i>
-            <i class="fab fa-youtube"> </i>
+        <div class="col">
+          <h4>Contact</h4>
+            <p><Strong>Hours: </Strong>Anytime</p>
+            <p><Strong>Phone: </Strong><a href="tel:+519-788-3156"></a>(519)-788-3156 </p>
+          <div class="follow">
+              <h4>Follow Us</h4>
+              <div class="icon"> 
+              <a href="https://www.instagram.com/arctic_volumes/">
+            <i class="fab fa-instagram"></i>
+              </a>
+                
+               </a>  
+                </i>
+              </div>
           </div>
         </div>
-      </div>
 
-      <div class="col">
-        <h4>About</h4>
-        <a href="#">About Us</a>
-        <a href="#">Delivery</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms and Conditions</a>
-        <a href="#">Contact Us</a>
-      </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About Us</a>
+            
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
 
-      <div class="col">
-        <h4>My Account</h4>
-        <a href="#">Sign In</a>
-        <a href="#">View Cart</a>
-        <a href="#">My Wishlist</a>
-        <a href="#">Track Orders</a>
-        <a href="#">Help</a>
-      </div>
-
-      <div class="copyright">
-        <p>@ 2025, Arctic Volumes</p>
-      </div>
+        <div class="copyright">
+          <p>@ 2025, Arctic Volumes</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>

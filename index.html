@@ -20,26 +20,50 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+
+    <script>
+      window.onscroll = function(){
+          growShrinkLogo()
+
+      };
+
+      function growShrinkLogo(){
+        var Logo = document.getElementById("Logo")
+        if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+           Logo.classList.add("scrolled");
+        } else{
+         Logo.classList.remove("scrolled");
+        }
+      }
+
+    </script>
     <!-- HEADING/ NAV BAR  -->
-    <header id="header">
+    <header class="header-transparent">
       <div class="header-inner">
+        
         <a href="index.html" aria-label="Home">
-          <img src="images/arcticvolumeslogo2.png" class="logo" alt="Arctic Volumes"/> 
+          <img src="images/actic volumes logo transparnt white.png" class="logo" alt="Arctic Volumes" style="width:125px;" id="Logo"/>  
         </a>
 
         <nav aria-label="Primary navigation">
            <ul id="navbar">
-            <li><a href="index.html">Shop</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Store.html">Volumes</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="index.html">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            
           </ul>
         </nav>
       </div>
     </header>
 
+
+    
+
     <!-- IMAGE CAROUSEL -->
     <section aria-label="Image Carousel">
       <div class="carousel" data-carousel>
+        <div class="carousel-slide">
         <button class="carousel-button prev" data-carousel-button="prev">&#8656</button>
         <button class="carousel-button next" data-carousel-button="next">&#8658</button>
 
@@ -54,190 +78,102 @@
             </div>
           </li>
           <li class="slide">
-            <img src="images/banner3.jpg" alt="">
+            <img src="images/nash large volume.jpg" alt="">
           </li>
           <li class="slide">
-            <img src="images/banner2.jpg" alt="">
+            <img src="images/banner 5.jpg" alt="small trianlges">
           </li>
           <li class="slide">
-            <img src="images/banner4.jpg" alt="">
+            <img src="images/arron on wall black and white.jpg" alt="">
+          </li>
+          <li class="slide">
+            <img src="images/chris volume.jpg" alt="">
+          </li>
+          <li class="slide">
+            <img src="images/tara low.jpg" alt="">
           </li>
         </ul>  
+        <script>
+
+          function nextSlide() {
+            const nextButton = document.querySelector('.carousel-button.next');
+        if (nextButton) {
+            nextButton.click(".carousel-button.next");
+            
+        }
+    }
+
+    let autoSlideInterval = setInterval(nextSlide, 12000);
+        </script>
       </div>
     </section>
 
 
     <!-- ACTUAL FEATURE SECTION -->
-    <section id="product1" class="section-p1">  
-      <h2>Feature Products</h2>
-      <p>Summer Collection New Modern Design</p>
-      <div class="pro-container">
-        <div class="pro">
-          <img src="images/wedgeslice.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Wedge Slice Volume</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$178.33</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
+    <section id="product1" class="section-p1"> 
+      <div class="home-product-store-section-top-banner"> 
+        <h2>Feature Products</h2>
+        <p>Newest Additions</p>
       </div>
-      <div class="pro">
-          <img src="images/squarepyramid.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Square Pyramid</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$125.19</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/stackabletriangle.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Stackable Triangle</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$78.99</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/trianglepyramid.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Triangle Pyramid</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$100 (2 pc)</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/asymmetrictriangle.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Asymmetric Triangle</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$148.30</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/arrow.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Arrow</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$318.44</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/pentagon.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Pentagon</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$153.88</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/keystonetriangle.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Keystone Triangle</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$150.45</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-      <div class="pro">
-          <img src="images/macrotriangle.jpg" alt="">
-          <div class="des">
-            <span>ArcticVolumes</span>
-            <h5>Macro Triangle (comes automatically with dual texture)</h5>
-            <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i> 
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-          </div>
-          <h4>$240.33</h4>
-        </div>  
-        <i class="fas fa-cart-shopping cart cart"></i>
-      </div>
-
     </section>
-
+<section id="product1" class="section-p1">
+      
+          <div class="pro">
+            <a href="product-bowtie.html"> 
+            <img src="images/bowtie1.png" alt="bowtie Volume">
+              <div class="des">
+                  <span>ArcticVolumes</span>
+                  <h5>Wedge Slice Volume</h5>
+                  <div class="star">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                  </div>
+                  <h4>$178.33</h4>
+              </div>
+              <i class="fas fa-cart-shopping cart"></i>
+            </a>
+          </div>  
+      
+          <div class="pro">
+            <a href="index.html"> 
+            <img src="images/wedgeslice.jpg" alt="Wedge Slice Volume">
+              <div class="des">
+                  <span>ArcticVolumes</span>
+                  <h5>Wedge Slice Volume</h5>
+                  <div class="star">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                  </div>
+                  <h4>$178.33</h4>
+              </div>
+              <i class="fas fa-cart-shopping cart"></i>
+            </a>
+          </div>
+      </section>
+</section>
 
     <!-- ABOUT ME  -->
     <div class="about-section">
         <div class="about-container">
             <div class="content-section">
               <div class="title">
-                  <h1>About Me</h1>
+                  <h1>About Me</h1>      
               </div>
               <div class="content">
                 <h3>Nice to meet you! I’m Jonathan Messier — climber, routesetter, and the mind behind Arctic Volumes.</h3>
                 <p> Since high school, I’ve been obsessed with how the right shapes can inspire movement and creativity. <br> <br> That passion became a mission: designing durable, functional, and visually striking volumes that spark ideas for setters and challenges for climbers.<br> <br> Every piece is handcrafted, tested, and built to handle hard falls and heavy traffic — while keeping climbers guessing. <br> <br> For me, climbing is a conversation between the wall and the climber, and my volumes are here to make that conversation unforgettable and to make you <strong> climb beyond ordinary.</strong>
 
                 <div class="button">
-                    <a href="">Read More</a>
+                    <a href="about.html">Read More</a>
                 </div>
-                <div class="socials">
-                   <a href=""><i class="fab fa-facebook-f"></i></a> 
-                   <a href=""><i class="fab fa-twitter"></i></a> 
-                   <a href=""><i class="fab fa-instagram"></i></a> 
+                <div class="socials"> 
+                   <a href="https://www.instagram.com/arctic_volumes/"><i class="fab fa-instagram"></i></a> 
                 </div>
               </div>
             </div>
@@ -254,7 +190,10 @@
     <section id="banner" class="section-m1">
       <h4>Volume Details</h4>
       <h2>The <span>BEST</span> volumes you can get. </h2>
+      <a href="Store.html">
       <button class="normal">Explore More</button>
+    </a>
+      </div>
     </section>
 
     <!-- PHOTO COLLAGE 
@@ -300,54 +239,34 @@
     </div>
 
     <!--NEWSLETTER SECTION  -->
-    <section id="newsletter" class="section-p1 section-m1">
-        <div class="newstext"> 
-          <h4>Sign Up For Newsletters </h4>
-          <p>Get E-mail updates about our latest shop and <span>special offers.</span> </p>
-
-        </div>
-        <div class="form">
-          <input type="text" placeholder="Your email address">
-          <button class="normal">Sign Up</button>
-        </div>
-    </section>
 
     <!--FOOTER  -->
 
     <footer class="section-p1">
         <div class="col">
           <h4>Contact</h4>
-            <p><Strong>Address: </Strong>123 street </p>
             <p><Strong>Hours: </Strong>Anytime</p>
-            <p><Strong>Phone: </Strong><a href="tel:+15195555555"></a>(519)-555-5555 </p>
+            <p><Strong>Phone: </Strong><a href="tel:+519-788-3156"></a>(519)-788-3156 </p>
           <div class="follow">
               <h4>Follow Us</h4>
-              <div class="icon">
-                <i class="fab fa-facebook-f"> </i>
-                <i class="fab fa-twitter"> </i>
-                <i class="fab fa-instagram"> </i>
-                <i class="fab fa-pinterest-p"> </i>
-                <i class="fab fa-youtube"> </i>
+              <div class="icon"> 
+              <a href="https://www.instagram.com/arctic_volumes/">
+            <i class="fab fa-instagram"></i>
+              </a>
+                
+               </a>  
+                </i>
               </div>
           </div>
         </div>
 
         <div class="col">
             <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery</a>
+            <a href="about.html">About Us</a>
+            
             <a href="#">Privacy Policy</a>
             <a href="#">Terms and Conditions</a>
-            <a href="#">Contact Us</a>
-        </div>
-
-          <div class="col">
-            <h4>My Account</h4>
-            <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
-            <a href="#">My Wishlist</a>
-            <a href="#">Track Orders</a>
-            <a href="#">Help</a>
+            <a href="contact.html">Contact Us</a>
         </div>
 
         <div class="copyright">
