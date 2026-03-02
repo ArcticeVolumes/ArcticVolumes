@@ -564,10 +564,6 @@ button:hover {
   margin-top: 30px;
 }
 
-.size-image {
-display: flex;
-width: 300px ;
-}
 
 @media(max-width: 800px){
   .product-container{
