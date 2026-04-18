@@ -27,6 +27,9 @@ h6 {
   font-size: 12px;
 }
 
+
+
+
 p {
   font-size: 20px;
   color: gray;
@@ -293,8 +296,49 @@ position:absolute;
   z-index: 2;
 }
 
+.carousel-caption-chris {
+  position: absolute;
+  bottom: 350px;
+  left: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.carousel-caption-volume {
+  position: absolute;
+  bottom: 200px;
+  left: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+
 @media (max-width: 768px) {
   .carousel-caption {
+    bottom: 1rem;
+    left: 1rem;
+    max-width: 70%;
+    padding: 0.75rem 1rem;
+  }
+
+   .carousel-caption-chris {
+    bottom: 1rem;
+    left: 1rem;
+    max-width: 70%;
+    padding: 0.75rem 1rem;
+  }
+
+   .carousel-caption-volume {
     bottom: 1rem;
     left: 1rem;
     max-width: 70%;
@@ -389,7 +433,8 @@ position:absolute;
 }
 
 #product1 .pro img {
-  width: 100%;
+  width:auto;
+  height: 400px;
   border-radius: 20px;
 }
 
@@ -479,7 +524,8 @@ position:absolute;
 }
 
 .main-image img {
-  width: 100%;
+  width:100%;
+  height:auto;
   border-radius: 8px;
   transition: 0.3 ease-in-out;
 }
@@ -576,8 +622,16 @@ button:hover {
   width: 100%;
   min-height: 65vh;
   background-color: #b6e0eb;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   padding-top: 100px;
+}
+
+.about-section-homepage {
+  width: 100%;
+  min-height: 65vh;
+  background-color: #b6e0eb;
+  padding-bottom: 20px;
+  padding-top: 0px;
 }
 
 .about-container {
@@ -589,15 +643,34 @@ button:hover {
   padding-top: 100px;
 }
 
-.content-section {
+.about-container-right {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  align-items: center;
+  padding-top: 10px;
+  flex-direction: row-reverse;
+}
+.content-section-left {
   float: left;
   width: 50%;
 }
 
+.content-section-right {
+  float: right;
+  width: 50%;
+}
 .about-image-section {
   display: flex;
   justify-content: space-evenly;
   width: 40%;
+}
+
+@media(max-width: 700px){
+  .about-image-section{
+    display: none;
+  }
 }
 
 .about-image-section img {
@@ -608,7 +681,7 @@ button:hover {
   border-radius: 25px;
 }
 
-/* contact section=*/
+/* contact section*/
 
 .contact-container{
   background: linear-gradient(#041e42, #b6e0eb) ;

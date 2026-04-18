@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>contact-forum</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cuprum:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+
+    <script>
+      window.onscroll = function(){
+          growShrinkLogo()
+
+      };
+
+      function growShrinkLogo(){
+        var Logo = document.getElementById("Logo")
+        if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+           Logo.classList.add("scrolled");
+        } else{
+         Logo.classList.remove("scrolled");
+        }
+      }
+
+    </script>
+    <!-- HEADING/ NAV BAR  -->
+    <header class="header-transparent">
+      <div class="header-inner">
+        
+        <a href="index.html" aria-label="Home">
+          <img src="images/actic volumes logo transparnt white.png" class="logo" alt="Arctic Volumes" style="width:125px;" id="Logo"/>  
+        </a>
+
+        <nav aria-label="Primary navigation">
+           <ul id="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Store.html">Volumes</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+<section>
+ <div class="store-section-top-banner"></div>
+
+
+<div class="product-container">
+  <!-- Left Side: Product Gallery -->
+  <div class="product-gallery">
+    <div class="main-image">
+      <img src="images/pentagon main.jpg" alt="bowtie">
+    </div>
+    <div class="thumbnails">
+      <img src="images/pentagon main.jpg" alt="Thumbnail 2">
+      <img src="images/pentagon 1.jpg" alt="Thumbnail 1">
+      <img src="images/pentagon1.png" alt="Thumbnail 3">
+    </div>
+  </div>
+
+  <script>
+    const thumbnails = document.querySelectorAll('.thumbnails img');
+const mainImage = document.querySelector('.main-image img');
+
+thumbnails.forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    mainImage.src = this.src; // Update main image source
+  });
+});
+  </script>
+
+    <div class="product-details">
+    <p class="brand">Arctic Volumes</p>
+    <h2>Pentagon</h2>
+    <p class="price">$153.88 CAD</p>
+
+        <!-- Options Section -->
+    <div class="options">
+      <h3>Size</h3>
+<div class="option-buttons">
+      <button data-price="153.88">12" (in)</button>
+      <button data-price="299.99">24" (in)</button>
+      <button data-price="418.76">36" (in)</button>
+      <button data-price="578.32">48" (in)</button>
+      
+</div>
+
+      <h3>Color</h3>
+<div class="color-swatches">
+        <button class="color-button" style="background-color: red;">Red</button>
+        <button class="color-button" style="background-color: orange;">Orange</button>
+        <button class="color-button" style="background-color: yellow;">Yellow</button>
+        <button class="color-button" style="background-color: rgb(28, 197, 28);">Green</button>
+        <button class="color-button" style="background-color: blue;">Blue</button>
+        <button class="color-button" style="background-color: aqua;">turqouise</button>
+        <button class="color-button" style="background-color: blueviolet;">purple</button>
+        <button class="color-button" style="background-color: white;">white</button>
+        <button class="color-button" style="background-color: gray;">gray</button>
+        <button class="color-button" style="background-color: black;">black</button>
+</div>
+    </div>
+    <button class="add-to-cart">Add to cart</button>
+
+          
+  </div>
+  </div>
+  
+
+</div>
+
+
+ <script>
+  // JavaScript to update price
+
+document.querySelectorAll('.option-buttons button').forEach(button => {
+  if (localStorage.getItem('activeButton') === button.dataset.price) {
+    button.classList.add('active');
+    document.querySelector('.price').innerText = `$${button.dataset.price} CAD`;
+  }
+
+  button.addEventListener('click', function() {
+    localStorage.setItem('activeButton', this.dataset.price);
+    const newPrice = this.dataset.price;
+    if (newPrice) {
+      document.querySelector('.price').innerText = `$${newPrice} CAD`;
+    } else {
+       document.querySelector('.price').innerText = 'Price available upon request';
+    }
+    document.querySelector('.option-buttons button.active')?.classList.remove('active');
+    this.classList.add('active');
+  });
+});
+</script>
+
+ <script>
+const buttons = document.querySelectorAll('.color-button');
+buttons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Remove 'active' class from all buttons
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Add 'active' class to the clicked button
+    this.classList.add('active');
+  });
+});
+
+
+</script>
+</section>
+
+
+    <!--FOOTER  -->
+
+    <footer class="section-p1">
+        <div class="col">
+          <h4>Contact</h4>
+            <p><Strong>Hours: </Strong>Anytime</p>
+            <p><Strong>Phone: </Strong><a href="tel:+519-788-3156"></a>(519)-788-3156 </p>
+          <div class="follow">
+              <h4>Follow Us</h4>
+              <div class="icon"> 
+              <a href="https://www.instagram.com/arctic_volumes/">
+            <i class="fab fa-instagram"></i>
+              </a>
+                
+               </a>  
+                </i>
+              </div>
+          </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About Us</a>
+            
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="copyright">
+          <p>@ 2025, Arctic Volumes</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
