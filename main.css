@@ -299,7 +299,7 @@ position:absolute;
 .carousel-caption-chris {
   position: absolute;
   bottom: 350px;
-  left: 1200px;
+  right: 100px;
   display: flex;
   flex-direction: column;
   gap: 15px;
