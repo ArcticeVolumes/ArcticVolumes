@@ -13,6 +13,20 @@ export const businessInfo = {
   hours: "Anytime",
   tagline: "Climb Beyond Ordinary",
   copyrightYear: 2025,
+  // Web3Forms access key for the contact form (same one the old site used).
+  // This key is meant to be public: it only lets people send messages to
+  // the inbox it is tied to.
+  web3formsAccessKey: "82785d15-dfa7-4dbd-b48f-8b6e75ee8682",
+};
+
+export const heroContent = {
+  heading: "Volumes Hand Crafted. Ready to Send.",
+  subheading: "Climb Beyond Ordinary.",
+  points: [
+    "Canadian made",
+    "Sustainably sourced from Canada",
+    "Unmatched texture, built to outlast the wall",
+  ],
 };
 
 export const aboutPageContent = {
@@ -82,9 +96,9 @@ export const products: ProductSeed[] = [
     slug: "bowtie",
     brand: "ArcticVolumes",
     images: [
-      { src: "/images/bowtie main.jpg", alt: "Bowtie volume, main view" },
-      { src: "/images/bowtie thumb1.jpg", alt: "Bowtie volume, angle 2" },
-      { src: "/images/bowtie2.jpg", alt: "Bowtie volume, angle 3" },
+      { src: "/images/web/bowtie-main.jpg", alt: "Bowtie volume, main view" },
+      { src: "/images/web/bowtie-angle-2.jpg", alt: "Bowtie volume, angle 2" },
+      { src: "/images/web/bowtie-angle-3.jpg", alt: "Bowtie volume, angle 3" },
       { src: "/images/bowtie 3d render.png", alt: "Bowtie volume, 3D render" },
     ],
     sizePricing: [
@@ -103,9 +117,9 @@ export const products: ProductSeed[] = [
     slug: "split-rombus-trombus",
     brand: "ArcticVolumes",
     images: [
-      { src: "/images/split rom 3.jpg", alt: "Split Rombus Trombus, main view" },
-      { src: "/images/split trom 1.jpg", alt: "Split Rombus Trombus, angle 2" },
-      { src: "/images/split trom with bowtie.jpg", alt: "Split Rombus Trombus paired with Bowtie" },
+      { src: "/images/web/split-rombus-main.jpg", alt: "Split Rombus Trombus, main view" },
+      { src: "/images/web/split-rombus-angle-2.jpg", alt: "Split Rombus Trombus, angle 2" },
+      { src: "/images/web/split-rombus-with-bowtie.jpg", alt: "Split Rombus Trombus paired with Bowtie" },
     ],
     sizePricing: [
       { size: "24in", priceCad: 75.3, pairPriceCad: 120.24 },
