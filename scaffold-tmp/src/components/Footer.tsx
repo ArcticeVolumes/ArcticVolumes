@@ -1,47 +1,63 @@
 import Link from "next/link";
 import { businessInfo } from "@/content/site-content";
 
+// Instagram glyph drawn inline, so the site does not load an icon library
+// from another server just for one icon.
+function InstagramIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 sm:grid-cols-3">
-        <div>
-          <h2 className="mb-2 font-medium">Contact</h2>
-          <p className="text-sm">Hours: {businessInfo.hours}</p>
-          <p className="text-sm">
-            Phone:{" "}
-            <a href="tel:+15197883156" className="hover:underline">
-              {businessInfo.phone}
-            </a>
-          </p>
-        </div>
-
-        <div>
-          <h2 className="mb-2 font-medium">Follow Us</h2>
+    <footer className="site-footer">
+      <div className="col">
+        <h4>Contact</h4>
+        <p>
+          <strong>Hours: </strong>
+          {businessInfo.hours}
+        </p>
+        <div className="follow">
+          <h4>Follow Us</h4>
           <a
             href={businessInfo.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:underline"
+            aria-label="Arctic Volumes on Instagram"
           >
-            Instagram
+            <InstagramIcon />
           </a>
-        </div>
-
-        <div>
-          <h2 className="mb-2 font-medium">About</h2>
-          <ul className="space-y-1 text-sm">
-            <li><Link href="/about" className="hover:underline">About Us</Link></li>
-            <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-            <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-            <li><Link href="/terms" className="hover:underline">Terms and Conditions</Link></li>
-          </ul>
         </div>
       </div>
 
-      <p className="pb-6 text-center text-sm text-gray-500">
-        &copy; {businessInfo.copyrightYear}, {businessInfo.name}
-      </p>
+      <div className="col">
+        <h4>About</h4>
+        <Link href="/about">About Us</Link>
+        <Link href="/privacy">Privacy Policy</Link>
+        <Link href="/terms">Terms and Conditions</Link>
+        <Link href="/contact">Contact Us</Link>
+      </div>
+
+      <div className="copyright">
+        <p>
+          &copy; {businessInfo.copyrightYear}, {businessInfo.name}
+        </p>
+      </div>
     </footer>
   );
 }

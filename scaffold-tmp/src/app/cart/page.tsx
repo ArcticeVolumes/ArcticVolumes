@@ -85,7 +85,7 @@ export default function CartPage() {
   }, 0);
 
   return (
-    <div className="mx-auto max-w-3xl p-8">
+    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-8">
       <h1 className="mb-6 text-2xl font-semibold">Your cart</h1>
 
       <ul className="divide-y">
@@ -108,8 +108,8 @@ export default function CartPage() {
           const lineTotal = unitPrice * line.quantity;
 
           return (
-            <li key={key} className="flex items-center gap-4 py-4">
-              <div className="flex-1">
+            <li key={key} className="flex flex-wrap items-center gap-x-4 gap-y-2 py-4">
+              <div className="min-w-0 basis-full sm:flex-1 sm:basis-0">
                 <p className="font-medium">{product.name}</p>
                 <p className="text-sm text-gray-500">
                   {line.size} / {line.pack} / {line.color}
@@ -127,10 +127,10 @@ export default function CartPage() {
                 className="w-16 rounded border px-2 py-1 text-center"
               />
 
-              <p className="w-32 text-right">{formatCad(lineTotal)}</p>
+              <p className="m-0 flex-1 text-right text-base sm:w-32 sm:flex-none">{formatCad(lineTotal)}</p>
 
               <button
-                className="text-sm text-gray-500 underline"
+                className="py-2 text-sm text-gray-500 underline"
                 onClick={() => removeFromCart(line)}
               >
                 Remove

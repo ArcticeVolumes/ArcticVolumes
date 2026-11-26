@@ -12,7 +12,7 @@ export default function ProductGallery({ images }: Props) {
   const active = images[activeIndex];
 
   return (
-    <div>
+    <div className="min-w-0">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageSrc(active.src)}
@@ -20,12 +20,12 @@ export default function ProductGallery({ images }: Props) {
         className="aspect-square w-full rounded object-cover"
       />
 
-      <div className="mt-3 flex gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         {images.map((image, index) => (
           <button
             key={image.src}
             onClick={() => setActiveIndex(index)}
-            className={`h-20 w-20 overflow-hidden rounded border-2 ${
+            className={`h-16 w-16 overflow-hidden sm:h-20 sm:w-20 rounded border-2 ${
               index === activeIndex ? "border-black" : "border-transparent"
             }`}
           >

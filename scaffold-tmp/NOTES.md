@@ -5,7 +5,7 @@
 - [ ] Optional: serve images via Next `Image` during the UI pass.
 - [x] Real site title and description set in `src/app/layout.tsx`.
 - [x] Homepage built (static hero, featured products, about blurb). Carousel left for the UI pass.
-- [ ] Remove or self-host Geist font if we want zero dependency on Google Fonts.
+- [x] Font is now Cuprum (old site's font), self-hosted at build by next/font. Geist removed.
 - [x] Header with nav and live cart count, footer on every page.
 - [x] About and Contact pages (contact form uses Web3Forms, same key as the old site).
 - [x] Stock shown on product pages (out of stock sizes, pair disabled under 2 units). Refreshes every 60s.
@@ -20,18 +20,19 @@
 - [ ] Check what `CNAME` is for before deleting it (domain/hosting).
 - [ ] Add Pentagon and other products once the friend finalizes them.
 - [ ] Git is currently on branch `new-main`, not `nextjs-rebuild`. Confirm which branch we want.
+- [ ] Create Gradient Buttons to fit the image instead of arrows for the homepage.
 
 ## Verified (automated: tsc, eslint, build, route responses)
 - [x] /store, /products/bowtie, /products/split-rombus-trombus return 200; unknown slug returns 404
 
 ## Needs manual click-through
-- [ ] Gallery thumbnails switch the main image
-- [ ] Size buttons update price
-- [ ] Single/Pair toggle on Split Rombus Trombus updates price
-- [ ] Bowtie shows no pair toggle
+- [x] Gallery thumbnails switch the main image
+- [x] Size buttons update price
+- [x] Single/Pair toggle on Split Rombus Trombus updates price
+- [x] Bowtie shows no pair toggle
 - [ ] Add to cart creates a line on /cart
 - [ ] Same options added twice bumps quantity; Single vs Pair are separate lines
-- [ ] Quantity change, Remove, and page refresh all behave
+- [x] Quantity change, Remove, and page refresh all behave
 - [ ] localStorage `arctic_volumes_cart` holds no prices
 
 ## Data and schema (later)
@@ -57,3 +58,17 @@
 - [ ] Weight and dimensions per size (for shipping)
 - [ ] Domain and hosting ownership
 - [ ] Should we allow for account creation?
+## UI pass (goal: match the old site one-to-one)
+- [x] Foundation: brand color tokens, Cuprum font, base text sizes, dark mode removed (`globals.css`).
+- [x] Header: translucent slate bar, white logo that shrinks on scroll, underline on current page, Cart link added.
+- [x] Footer: light grey, Contact and About columns, inline Instagram icon.
+- [x] Button styles `.btn-normal` and `.btn-white` defined (not used yet).
+- [ ] Store page: "Arctic Volumes" title with blue rule, rounded cards with pale green border, teal price, cart icon.
+- [x] Homepage: hero carousel (6 photos, 12s auto-fade, arrows), feature products, About Me band, Volume Details banner, photo gallery.
+- [x] Product cards restyled (pale green border, teal price, cart badge), using the 3D drawings. Shared by homepage and store.
+- [x] Homepage images compressed into `public/images/web/` (33 MB down to 4.6 MB).
+- [x] About page: two pale blue bands (company, owner) and the workshop photo collage.
+- [x] Contact page: navy-to-pale-blue gradient, pill fields, Submit button with the arrow volume as a send icon (large, white background removed).
+- [ ] Store page title banner (waiting on the stars decision), Product page, Cart, Checkout success.
+- [x] Responsive check: every page tested at 320, 390, 768, 1280 and 1920px wide. No sideways scrolling.
+- RULE for the UI pass: every page we style gets checked at phone, tablet and desktop widths before it is called done.

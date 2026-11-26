@@ -8,65 +8,93 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto grid w-full max-w-4xl gap-10 px-4 py-12 md:grid-cols-2">
+    <main>
+      {/* 1. Get In Touch form on the gradient */}
+      <section className="contact-page">
       {/* The form posts straight to Web3Forms, which emails the message to
           the business. Same service and key as the old site. */}
       <form
         action="https://api.web3forms.com/submit"
         method="POST"
-        className="flex flex-col gap-4"
+        className="contact-form"
       >
-        <h1 className="text-3xl font-semibold">Get In Touch</h1>
+        <div className="contact-title">
+          <h1>Get In Touch</h1>
+          <hr />
+        </div>
+
         <input type="hidden" name="access_key" value={businessInfo.web3formsAccessKey} />
         <input
           type="text"
           name="Name"
           placeholder="Your Name"
+          aria-label="Your name"
           required
-          className="rounded border px-3 py-2"
+          className="contact-input"
         />
         <input
           type="email"
           name="Email"
           placeholder="Your Email"
+          aria-label="Your email"
           required
-          className="rounded border px-3 py-2"
+          className="contact-input"
         />
         <textarea
           name="message"
           placeholder="Your Message"
+          aria-label="Your message"
           required
-          rows={6}
-          className="rounded border px-3 py-2"
+          className="contact-input"
         />
-        <button
-          type="submit"
-          className="rounded bg-black py-3 text-white hover:bg-gray-800"
-        >
+
+        <button type="submit" className="contact-submit">
           Submit
+          {/* One of the arrow volumes, turned to point right like a "send" icon */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/web/submit-arrow.png" alt="" height={44} />
         </button>
       </form>
+      </section>
 
-      <div>
-        <h2 className="mb-4 text-2xl font-semibold">Contact</h2>
-        <p>Hours: {businessInfo.hours}</p>
-        <p>
-          Phone:{" "}
-          <a href="tel:+15197883156" className="hover:underline">
-            {businessInfo.phone}
-          </a>
-        </p>
-        <p className="mt-4">
-          <a
-            href={businessInfo.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            Follow us on Instagram
-          </a>
-        </p>
-      </div>
+      {/* 2. Contact details */}
+      <section className="contact-details">
+        <h2>Contact</h2>
+        <div className="contact-details-grid">
+          <div>
+            <h4>Hours</h4>
+            <p>{businessInfo.hours}</p>
+          </div>
+          <div>
+            <h4>Follow Us</h4>
+            <p>
+              <a
+                href={businessInfo.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-details-social"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="22"
+                  height="22"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                </svg>
+                Instagram
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

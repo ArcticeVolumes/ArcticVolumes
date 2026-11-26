@@ -1,26 +1,982 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ------------------------------------------------------------------
+   Brand tokens, taken from the old site's main.css.
+   Use them as Tailwind classes: bg-brand, text-teal, border-pale, etc.
+   ------------------------------------------------------------------ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: #29b4d1; /* ice blue: underlines, accents */
+  --color-navy: #041e42;
+  --color-teal: #088178; /* prices, link hover */
+  --color-pale: #b6e0eb;
+  --color-ink: #222222; /* headings and dark text */
+  --color-muted: #808080; /* body text ("gray" on the old site) */
+  --color-footer: #f8f8f8;
+  --color-header: rgba(69, 92, 104, 0.6); /* translucent slate bar */
+
+  --font-sans: var(--font-cuprum), Courier, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base text styles. Inside @layer base so Tailwind classes on an element
+   (text-sm, text-gray-500, ...) still win over these defaults. */
+@layer base {
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  /* Headings are bold, as browsers show them by default on the old site. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+  }
+
+  h1 {
+    /* 50px on desktop, scales down on phones */
+    font-size: clamp(2rem, 6vw, 50px);
+    line-height: 1.28;
+    color: var(--color-ink);
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 5.5vw, 46px);
+    line-height: 1.17;
+    color: var(--color-ink);
+  }
+
+  h4 {
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+
+  p {
+    font-size: 20px;
+    color: var(--color-muted);
+    margin: 15px 0 20px 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------
+   Header (matches .header-transparent / #navbar on the old site)
+   ------------------------------------------------------------------ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 1px 20px;
+  background-color: var(--color-header);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+}
+
+.site-header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.site-logo {
+  display: block;
+  width: 125px;
+  height: auto;
+  transition: width 0.4s ease-out;
+}
+
+/* Logo shrinks once the page is scrolled */
+.site-logo.scrolled {
+  width: 75px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  padding: 4px 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+/* Short ice-blue underline on hover and on the current page */
+.nav-link.active::after,
+.nav-link:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: var(--color-brand);
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+/* Pushes page content below the fixed header (logo is 125px wide, 4:3). */
+.site-content {
+  padding-top: 96px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 550px) {
+  /* On phones the header is part of the page (not floating), so however
+     many rows the links wrap onto, it can never cover the content. */
+  .site-header {
+    position: static;
+  }
+  .site-header-inner {
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 8px;
+  }
+  .site-nav {
+    gap: 4px 6px;
+  }
+  .nav-link {
+    display: inline-block;
+    padding: 10px 12px; /* taller tap area for fingers */
+  }
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    bottom: 4px;
+  }
+  .site-content {
+    padding-top: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Footer (matches the old footer rules)
+   ------------------------------------------------------------------ */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  padding: 40px clamp(1rem, 5vw, 80px);
+  background: var(--color-footer);
+}
+
+.site-footer .col {
+  display: flex;
+  flex: 1 1 220px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 180px;
+}
+
+.site-footer h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.site-footer a {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--color-teal);
+}
+
+.site-footer .follow {
+  margin-top: 0.5rem;
+}
+
+.site-footer .follow a {
+  color: #465b52;
+}
+
+.site-footer .follow a:hover {
+  color: var(--color-teal);
+}
+
+.site-footer .copyright {
+  flex: 1 1 100%;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.site-footer .copyright p {
+  font-size: 0.75rem;
+  color: #555555;
+}
+
+/* ------------------------------------------------------------------
+   Buttons (button.normal and button.white on the old site)
+   ------------------------------------------------------------------ */
+.btn-normal {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-white {
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* ------------------------------------------------------------------
+   Section heading used above product grids ("Feature Products")
+   ------------------------------------------------------------------ */
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px clamp(1rem, 5vw, 80px) 0;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------
+   Product cards (the old site's "#product1 .pro")
+   ------------------------------------------------------------------ */
+.product-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 40px clamp(1rem, 5vw, 80px);
+  text-align: center;
+}
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+  width: 20%;
+  min-width: 250px;
+  max-width: 100%;
+  margin: 20px 5px 0;
+  padding: 10px 12px 20px;
+  border: 2px solid #cce7d0;
+  border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  transition: 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.26);
+}
+
+/* Same-size frame on every card so the cards line up; the whole image is
+   shown, never cropped. */
+.product-card-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+  padding: 10px 0;
+}
+
+.product-card-image img {
+  max-width: 90%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-card-text {
+  /* leaves room for the cart badge in the corner */
+  padding: 0 46px;
+}
+
+.product-card-brand {
+  font-size: 12px;
+  color: #606063;
+}
+
+.product-card-name {
+  padding-top: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.product-card-price {
+  margin: 0;
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-teal);
+}
+
+.product-card-cart {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #cce7d0;
+  border-radius: 50px;
+  background-color: #e8f6ea;
+  color: var(--color-teal);
+}
+
+/* ------------------------------------------------------------------
+   Homepage: hero carousel
+   ------------------------------------------------------------------ */
+/* Pull the homepage up so the hero photo sits under the translucent header. */
+.home {
+  margin-top: -96px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 420px;
+  overflow: hidden;
+  background: #111111;
+}
+
+.hero > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 400ms opacity ease-in-out;
+  transition-delay: 500ms;
+}
+
+.hero-slide.active {
+  z-index: 1;
+  opacity: 1;
+  transition-delay: 10ms;
+}
+
+.hero-slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Darkened edges so the white text stays readable */
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0.9) 95%
+  );
+}
+
+.hero-button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 4rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.hero-button:hover,
+.hero-button:focus-visible {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+.hero-button.prev {
+  left: 1rem;
+}
+
+.hero-button.next {
+  right: 1rem;
+}
+
+.hero-caption {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+/* Caption areas. The old site used fixed pixel offsets; these use
+   percentages so each caption stays in the same part of the photo on
+   any screen. */
+.hero-caption.bottom-left {
+  bottom: 2rem;
+  left: 2rem;
+  max-width: 50%;
+  align-items: flex-start;
+}
+
+.hero-caption.lower-middle {
+  bottom: 20%;
+  left: 40%;
+  max-width: 55%;
+}
+
+.hero-caption.right-upper {
+  right: 8%;
+  bottom: 40%;
+  max-width: 55%;
+  gap: 15px;
+  text-align: center;
+}
+
+.hero-caption.right-middle {
+  right: 6%;
+  bottom: 35%;
+  max-width: 55%;
+  gap: 15px;
+}
+
+.hero-line {
+  margin: 0;
+}
+
+.hero-line.eyebrow {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.hero-line.heading {
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-pale);
+}
+
+.hero-caption.lower-middle .hero-line.heading,
+.hero-caption.right-upper .hero-line.heading,
+.hero-caption.right-middle .hero-line.heading {
+  font-size: clamp(1.75rem, 4.5vw, 50px);
+  line-height: 1.28;
+}
+
+.hero-line.giant {
+  font-size: clamp(2.5rem, 7vw, 100px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-pale);
+}
+
+.hero-line.sub {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.hero-line.canadian {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1rem;
+  color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  /* On small screens every caption goes to the bottom-left corner. */
+  .hero-caption.bottom-left,
+  .hero-caption.lower-middle,
+  .hero-caption.right-upper,
+  .hero-caption.right-middle {
+    right: auto;
+    bottom: 1rem;
+    left: 1rem;
+    max-width: 85%;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-button {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 550px) {
+  /* The header is part of the page on phones, so nothing to slide under. */
+  .home {
+    margin-top: 0;
+  }
+  .hero {
+    height: 75vh;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Homepage: About Me band
+   ------------------------------------------------------------------ */
+.home-about {
+  width: 100%;
+  min-height: 65vh;
+  padding: 80px 0 60px;
+  background-color: var(--color-pale);
+}
+
+.home-about-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.home-about-text {
+  flex: 1 1 60%;
+}
+
+.home-about-text h3 {
+  font-size: 1.17em;
+  font-weight: 700;
+  color: #000000;
+}
+
+.home-about-link {
+  display: block;
+  width: fit-content;
+  font-size: 20px;
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.home-about-social {
+  display: inline-block;
+  margin-top: 6px;
+  color: #0000ee;
+}
+
+.home-about-image {
+  display: flex;
+  flex: 0 1 40%;
+  justify-content: space-evenly;
+}
+
+.home-about-image img {
+  width: 70%;
+  height: auto;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.26);
+}
+
+@media (max-width: 700px) {
+  /* Photo stacks under the text */
+  .home-about-inner {
+    flex-direction: column;
+    width: auto;
+    padding: 0 clamp(1rem, 5vw, 2rem);
+  }
+  .home-about-image img {
+    width: min(70%, 320px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Homepage: "Volume Details" banner
+   ------------------------------------------------------------------ */
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40vh;
+  min-height: 260px;
+  padding: 0 1rem;
+  background-image: url("/images/web/call-to-action.jpg");
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+}
+
+.home-banner h4 {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.home-banner h2 {
+  padding: 10px 0;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.home-banner h2 span {
+  color: #f50000;
+}
+
+.home-banner .btn-normal:hover {
+  background-color: var(--color-teal);
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------------
+   Homepage: photo gallery
+   ------------------------------------------------------------------ */
+.home-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 20px 0;
+  text-align: center;
+}
+
+.home-gallery-heading {
+  width: 50%;
+  padding-bottom: 50px;
+}
+
+.home-gallery-heading h3 {
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--color-ink);
+  font-size: clamp(2em, 6vw, 3em);
+  font-weight: 800;
+}
+
+.home-gallery-heading h3 span {
+  font-weight: 400;
+}
+
+.home-gallery-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-gallery-column {
+  display: flex;
+  flex-direction: column;
+  width: 32.5%;
+}
+
+.home-gallery-column img {
+  width: 100%;
+  padding-bottom: 15px;
+  border-radius: 5px;
+}
+
+@media (max-width: 769px) {
+  /* Tablets: two columns. The three groups are merged and flowed. */
+  .home-gallery-heading {
+    width: 100%;
+  }
+  .home-gallery-box {
+    display: block;
+    column-count: 2;
+    column-gap: 15px;
+  }
+  .home-gallery-column {
+    display: contents;
+  }
+  .home-gallery-column img {
+    display: block;
+    break-inside: avoid;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Phones: one column */
+  .home-gallery-box {
+    column-count: 1;
+  }
+}
+
+/* ------------------------------------------------------------------
+   About page: pale blue bands (old ".about-section")
+   ------------------------------------------------------------------ */
+.about-band {
+  width: 100%;
+  min-height: 65vh;
+  padding: 60px 0 40px;
+  background-color: var(--color-pale);
+}
+
+.about-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Photo on the left, text on the right */
+.about-band-inner.reverse {
+  flex-direction: row-reverse;
+}
+
+.about-band-text {
+  flex: 0 1 50%;
+}
+
+/* The second band's heading is an h2 for page structure, but looks like the h1 */
+.about-band-title {
+  font-size: clamp(2rem, 6vw, 50px);
+  line-height: 1.28;
+}
+
+.about-band-text h3 {
+  font-size: 1.17em;
+  font-weight: 700;
+  color: #000000;
+}
+
+.about-band-image {
+  display: flex;
+  flex: 0 1 40%;
+  justify-content: space-evenly;
+}
+
+.about-band-image img {
+  width: 70%;
+  height: auto;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.26);
+}
+
+.about-gallery {
+  margin: 40px 20px 0;
+}
+
+@media (max-width: 900px) {
+  .about-band-inner {
+    width: 90%;
+  }
+  .about-band-text {
+    flex-basis: 58%;
+  }
+  .about-band-image img {
+    width: 90%;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Photo stacks under the text (the old site hid it on phones) */
+  .about-band {
+    min-height: 0;
+    padding: 40px 0 30px;
+  }
+  .about-band-inner,
+  .about-band-inner.reverse {
+    flex-direction: column;
+    width: auto;
+    padding: 0 clamp(1rem, 5vw, 2rem);
+  }
+  .about-band-image img {
+    width: min(70%, 320px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Contact page (old ".contact-container")
+   ------------------------------------------------------------------ */
+.contact-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  min-height: 100vh;
+  /* slides up under the translucent header */
+  margin-top: -96px;
+  padding: 150px 1rem 60px;
+  background: linear-gradient(var(--color-navy), var(--color-pale));
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: min(700px, 100%);
+}
+
+.contact-title {
+  max-width: 100%;
+}
+
+.contact-title h1 {
+  margin-bottom: 30px;
+  font-size: clamp(2.75rem, 11vw, 80px);
+  line-height: 1.1;
+  color: var(--color-brand);
+}
+
+.contact-title hr {
+  width: 400px;
+  max-width: 100%;
+  height: 7px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--color-brand);
+}
+
+.contact-input {
+  width: 100%;
+  height: 70px;
+  padding-left: 20px;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  outline: none;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555555;
+}
+
+textarea.contact-input {
+  height: 200px;
+  padding-top: 15px;
+  border-radius: 20px;
+}
+
+.contact-input:focus {
+  border-color: #d2056f;
+}
+
+.contact-input::placeholder {
+  color: #989898;
+}
+
+.contact-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  min-height: 80px;
+  padding: 15px 20px 15px 30px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(270deg, var(--color-teal), var(--color-navy));
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.contact-submit img {
+  width: auto;
+  height: 44px;
+}
+
+@media (max-width: 550px) {
+  /* The header is part of the page on phones */
+  .contact-page {
+    min-height: 0;
+    margin-top: 0;
+    padding: 40px 1rem 50px;
+  }
+}
+
+/* Contact details section under the form (new, not on the old site) */
+.contact-details {
+  padding: 60px clamp(1rem, 5vw, 80px);
+  background: #ffffff;
+  text-align: center;
+}
+
+.contact-details h2 {
+  margin-bottom: 30px;
+}
+
+.contact-details-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem clamp(2rem, 8vw, 6rem);
+}
+
+.contact-details-grid h4 {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.contact-details-grid p {
+  margin: 8px 0 0;
+}
+
+.contact-details-grid a {
+  color: var(--color-ink);
+}
+
+.contact-details-grid a:hover {
+  color: var(--color-teal);
+}
+
+.contact-details-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }

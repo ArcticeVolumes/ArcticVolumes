@@ -69,7 +69,7 @@ export default function ProductOptions({
       <h1 className="text-3xl font-semibold">{product.name}</h1>
       <p className="mt-2 text-2xl">{formatCad(price)}</p>
 
-      <h2 className="mt-6 mb-2 font-medium">Size</h2>
+      <h2 className="mt-6 mb-2 text-base font-medium">Size</h2>
       <div className="flex flex-wrap gap-2">
         {product.sizePricing.map((option, index) => (
           <button
@@ -87,7 +87,7 @@ export default function ProductOptions({
 
       {product.sellsAsPair && (
         <>
-          <h2 className="mt-6 mb-2 font-medium">Quantity</h2>
+          <h2 className="mt-6 mb-2 text-base font-medium">Quantity</h2>
           <div className="flex gap-2">
             {(["single", "pair"] as const).map((option) => (
               <button
@@ -105,7 +105,7 @@ export default function ProductOptions({
         </>
       )}
 
-      <h2 className="mt-6 mb-2 font-medium">
+      <h2 className="mt-6 mb-2 text-base font-medium">
         Color: <span className="font-normal capitalize">{color}</span>
       </h2>
       <div className="flex flex-wrap gap-2">

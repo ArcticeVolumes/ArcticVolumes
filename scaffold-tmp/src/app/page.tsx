@@ -1,52 +1,113 @@
 import Link from "next/link";
+import HeroCarousel from "@/components/HeroCarousel";
 import ProductGrid from "@/components/ProductGrid";
 import { getAllProducts } from "@/lib/products";
-import { heroContent, homepageAboutBlurb } from "@/content/site-content";
+import {
+  aboutPageContent,
+  businessInfo,
+  heroSlides,
+  homeGalleryColumns,
+  homepageAboutBlurb,
+} from "@/content/site-content";
 
 export default function HomePage() {
+  const aboutParagraphs = homepageAboutBlurb.split("\n\n");
+
   return (
-    <main>
-      {/* Hero. Static for now; the old site's carousel can come back in the UI pass. */}
-      <section className="border-b">
-        <div className="mx-auto max-w-6xl px-4 py-20">
-          <h1 className="text-4xl font-semibold">{heroContent.heading}</h1>
-          <p className="mt-2 text-2xl">{heroContent.subheading}</p>
-          <ul className="mt-6 space-y-1 text-gray-500">
-            {heroContent.points.map((point) => (
-              <li key={point}>{point}</li>
+    <main className="home">
+      {/* The page's main heading, for search engines and screen readers.
+          The visible headline text lives on the hero photos. */}
+      <h1 className="sr-only">
+        {businessInfo.name}: handcrafted, Canadian made climbing volumes
+      </h1>
+
+      {/* 1. Hero carousel (slides under the translucent header) */}
+      <HeroCarousel slides={heroSlides} />
+
+      {/* 2. Feature products */}
+      <section className="home-products">
+        <div className="section-heading">
+          <h2>Feature Products</h2>
+          <p>Newest Additions</p>
+        </div>
+        <ProductGrid products={getAllProducts()} />
+      </section>
+
+      {/* 3. About me */}
+      <section className="home-about">
+        <div className="home-about-inner">
+          <div className="home-about-text">
+            <h2>About Me</h2>
+            <h3>{aboutPageContent.ownerSection.subheading}</h3>
+            {aboutParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
             ))}
-          </ul>
-          <Link
-            href="/store"
-            className="mt-8 inline-block rounded bg-black px-6 py-3 text-white hover:bg-gray-800"
-          >
-            Shop Volumes
-          </Link>
+            <Link href="/about" className="home-about-link">
+              Read More
+            </Link>
+            <a
+              href={businessInfo.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Arctic Volumes on Instagram"
+              className="home-about-social"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="home-about-image">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/web/about-jonathan.jpg"
+              alt="Jonathan Messier with one of his volumes"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
-      {/* Featured products */}
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-2xl font-semibold">Feature Products</h2>
-        <p className="mb-8 text-gray-500">Newest Additions</p>
-        <ProductGrid products={getAllProducts()} />
-        <Link href="/store" className="mt-8 inline-block underline">
-          More
+      {/* 4. Call to action banner */}
+      <section className="home-banner">
+        <h4>Volume Details</h4>
+        <h2>
+          The <span>BEST</span> volumes you can get.
+        </h2>
+        <Link href="/store" className="btn-normal">
+          Explore More
         </Link>
       </section>
 
-      {/* About blurb */}
-      <section className="border-t">
-        <div className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-4 text-2xl font-semibold">About Me</h2>
-          {homepageAboutBlurb.split("\n\n").map((paragraph) => (
-            <p key={paragraph} className="mb-4">
-              {paragraph}
-            </p>
+      {/* 5. Photo gallery */}
+      <section className="home-gallery">
+        <div className="home-gallery-heading">
+          <h3>
+            Photos <span>Gallery</span>
+          </h3>
+        </div>
+        <div className="home-gallery-box">
+          {homeGalleryColumns.map((column, index) => (
+            <div key={index} className="home-gallery-column">
+              {column.map((photo) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" />
+              ))}
+            </div>
           ))}
-          <Link href="/about" className="underline">
-            Read More
-          </Link>
         </div>
       </section>
     </main>

@@ -8,7 +8,6 @@
 export const businessInfo = {
   name: "Arctic Volumes",
   ownerName: "Jonathan Messier",
-  phone: "(519)-788-3156",
   instagram: "https://www.instagram.com/arctic_volumes/",
   hours: "Anytime",
   tagline: "Climb Beyond Ordinary",
@@ -19,15 +18,124 @@ export const businessInfo = {
   web3formsAccessKey: "82785d15-dfa7-4dbd-b48f-8b6e75ee8682",
 };
 
-export const heroContent = {
-  heading: "Volumes Hand Crafted. Ready to Send.",
-  subheading: "Climb Beyond Ordinary.",
-  points: [
-    "Canadian made",
-    "Sustainably sourced from Canada",
-    "Unmatched texture, built to outlast the wall",
-  ],
+// Homepage hero carousel. Same photos, order and captions as the old site.
+// "position" says which area of the photo the caption sits in.
+export type HeroLineStyle = "eyebrow" | "heading" | "giant" | "sub" | "canadian";
+
+export interface HeroSlide {
+  src: string;
+  alt: string;
+  caption?: {
+    position: "bottom-left" | "lower-middle" | "right-upper" | "right-middle";
+    lines: { style: HeroLineStyle; text: string }[];
+  };
+}
+
+export const heroSlides: HeroSlide[] = [
+  {
+    src: "/images/web/hero-1.jpg",
+    alt: "Two small Arctic Volumes pieces on a concrete floor",
+    caption: {
+      position: "bottom-left",
+      lines: [
+        { style: "eyebrow", text: "Volumes Hand Crafted." },
+        { style: "heading", text: "Ready to Send." },
+        { style: "heading", text: "Climb Beyond Ordinary." },
+        { style: "canadian", text: "Canadian made" },
+      ],
+    },
+  },
+  {
+    src: "/images/web/hero-2.jpg",
+    alt: "Climber on a large volume while a crowd watches",
+  },
+  {
+    src: "/images/web/hero-3.jpg",
+    alt: "Small triangle volumes in several colors",
+    caption: {
+      position: "lower-middle",
+      lines: [{ style: "heading", text: "Sustainably Sourced from Canada." }],
+    },
+  },
+  {
+    src: "/images/web/hero-4.jpg",
+    alt: "Climber on a gym wall set with Arctic Volumes pieces",
+    caption: {
+      position: "right-upper",
+      lines: [
+        { style: "giant", text: "Unmatched Texture" },
+        { style: "heading", text: "Built to Outlast the Wall." },
+        { style: "sub", text: "Designed to endure constant abuse without fading." },
+      ],
+    },
+  },
+  {
+    src: "/images/web/hero-5.jpg",
+    alt: "Large pyramid volume on a red climbing wall",
+    caption: {
+      position: "right-middle",
+      lines: [
+        { style: "heading", text: "Unbreakable. Unshakeable. Unmatched." },
+        { style: "canadian", text: "Canadian made" },
+      ],
+    },
+  },
+  {
+    src: "/images/web/hero-6.jpg",
+    alt: "Routesetters installing large volumes in a climbing gym",
+  },
+];
+
+// About page photos.
+export const aboutImages = {
+  company: {
+    src: "/images/web/about-company.jpg",
+    alt: "Jonathan building a volume with a nail gun",
+  },
+  owner: {
+    src: "/images/web/about-owner.jpg",
+    alt: "Jonathan Messier outside his workshop",
+  },
 };
+
+// About page collage: columns of 2, 3 and 2 photos, same order as the old site.
+export const aboutGalleryColumns: { src: string; alt: string }[][] = [
+  [
+    { src: "/images/web/about-gallery-1.jpg", alt: "Jonathan inspecting a cut plywood panel" },
+    { src: "/images/web/about-gallery-2.jpg", alt: "Jonathan cutting plywood with a track saw" },
+  ],
+  [
+    { src: "/images/web/about-gallery-3.jpg", alt: "Sketchbook, plywood pieces and a drill on a deck" },
+    { src: "/images/web/about-gallery-4.jpg", alt: "Jonathan holding a small finished volume" },
+    { src: "/images/web/about-gallery-5.jpg", alt: "Jonathan checking a part" },
+  ],
+  [
+    { src: "/images/web/about-gallery-6.jpg", alt: "Jonathan gluing a volume together" },
+    { src: "/images/web/about-gallery-7.jpg", alt: "Jonathan spraying a finished volume" },
+  ],
+];
+
+// Homepage photo gallery: three columns of four, same order as the old site.
+export const homeGalleryColumns: { src: string; alt: string }[][] = [
+  [
+    { src: "/images/web/gallery-01.jpg", alt: "Stack of colorful triangle volumes" },
+    { src: "/images/web/gallery-02.jpg", alt: "Climbing shoe on a blue Arctic Volumes pyramid" },
+    { src: "/images/web/gallery-03.jpg", alt: "Volumes mounted on a gym wall" },
+    { src: "/images/web/gallery-04.jpg", alt: "Volume close-up on a gym wall" },
+  ],
+  [
+    { src: "/images/web/gallery-05.jpg", alt: "Two grey volumes on a concrete floor" },
+    { src: "/images/web/gallery-06.jpg", alt: "Blue volumes on a red climbing wall" },
+    { src: "/images/web/gallery-07.jpg", alt: "Dark volume on a light climbing wall" },
+    { src: "/images/web/gallery-08.jpg", alt: "Arctic Volumes piece in use at a gym" },
+  ],
+  [
+    { src: "/images/web/gallery-09.jpg", alt: "Setters mounting large white volumes" },
+    { src: "/images/web/gallery-10.jpg", alt: "Setter drilling a volume onto the wall" },
+    { src: "/images/web/gallery-11.jpg", alt: "Setter on a ladder installing a volume" },
+    { src: "/images/web/gallery-12.jpg", alt: "Setting day at the climbing gym" },
+  ],
+];
 
 export const aboutPageContent = {
   companySection: {
@@ -48,7 +156,7 @@ That fascination turned into a mission: to create rock climbing volumes that don
 
 I believe climbing is more than a sport; it's a conversation between the wall and the climber. My volumes are built to make that conversation more interesting, whether you're chasing your first send, battling a comp crux, or simply enjoying a playful session with friends.
 
-Every volume is handcrafted with attention to detail, tested to meet real-world demands, and designed to work across a variety of wall angles. If you're looking to refresh your gym, challenge your setters, or take your home wall to the next level, I'm here to help you climb beyond ordinary.`,
+Every volume is handcrafted with attention to detail, tested to meet real-world demands, and designed to work across a variety of wall angles. If you're looking to refresh your gym, challenge your setters, or take your home wall to the next level, I'm here to help you climb beyond ordinary. Whether you're setting a new route or exploring fresh challenges, my volumes are crafted to inspire creativity and elevate your climbing experience. With a focus on innovation and quality, they transform walls into dynamic spaces where climbers can push their limits and discover new possibilities.`,
   },
 };
 
@@ -82,6 +190,9 @@ export interface ProductSeed {
   slug: string;
   brand: string;
   images: { src: string; alt: string }[];
+  // Drawing shown on the store and homepage cards (the old site used 3D
+  // renders there). Falls back to the first photo when not set.
+  cardImage?: { src: string; alt: string };
   // priceCad is the single-unit price. pairPriceCad only exists for
   // products that customers can buy as a single or as a pair.
   sizePricing: { size: string; priceCad: number; pairPriceCad?: number }[];
@@ -94,6 +205,7 @@ export const products: ProductSeed[] = [
   {
     name: "Bowtie",
     slug: "bowtie",
+    cardImage: { src: "/images/web/card-bowtie.png", alt: "Bowtie volume drawing" },
     brand: "ArcticVolumes",
     images: [
       { src: "/images/web/bowtie-main.jpg", alt: "Bowtie volume, main view" },
@@ -115,6 +227,7 @@ export const products: ProductSeed[] = [
     {
     name: "Split Rombus Trombus",
     slug: "split-rombus-trombus",
+    cardImage: { src: "/images/web/card-split-rombus-trombus.png", alt: "Split Rombus Trombus volume drawing" },
     brand: "ArcticVolumes",
     images: [
       { src: "/images/web/split-rombus-main.jpg", alt: "Split Rombus Trombus, main view" },

@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function StorePage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-12">
-      <h1 className="mb-8 text-3xl font-semibold">Volumes</h1>
+    <main className="w-full py-12">
+      <h1 className="mb-2 px-4 text-center">Volumes</h1>
       <ProductGrid products={getAllProducts()} />
     </main>
   );
